@@ -1,0 +1,84 @@
+---
+title: "YSI Sweave Tutorial"
+author: "Ross"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: darkly
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.align = "centre"
+)
+library(tidyverse)
+```
+
+# Why
+
+
+> Bottom line: Markdown is not LaTeX. It was designed for HTML instead of LaTeX.
+
+(Yihui Xie Explaining Markdown, Pandoc,formattting power on SO )[https://stackoverflow.com/a/17648350/9115822]
+
+
+# Basics
+
+#### Function Syntax
+
+- `\` leads a function
+- `{}` brackets are used instead of `()`
+
+A simple form of a `sweave` document is:
+
+```
+\documentclass{article}
+
+\begin{document}
+
+Text
+
+\end{document}
+
+```
+
+
+# Spacing, Page Breaks, Formatting
+
+
+
+# Margins
+
+```
+\usepackage[margin=0.8in]{geometry}
+```
+
+# Typeface
+
+# Table of Contents
+
+
+# Margin Control
+
+
+# Typeface / Font
+
+
+# Footnotes
+
+
+# Bibliographies
+
+
+# Citations
+
+
+# Page Numbers
+
+
+
+# Tables
