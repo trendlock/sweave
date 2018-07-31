@@ -3,11 +3,11 @@ title: "YSI Sweave Tutorial"
 author: "Ross"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  bookdown::html_document2:
     theme: darkly
     code_folding: "hide"
     toc: true
-    toc_depth: 2
+    toc_depth: 1
     toc_float: true
 ---
 
@@ -55,7 +55,7 @@ git clone https://github.com/trendlock/picklerick.git
 
 # Basics
 
-#### Function Syntax
+## Function Syntax
 
 - `\` leads a function
 - `{}` brackets are used instead of `()`
@@ -123,14 +123,14 @@ Text
 # Typeface
 
 
-#### Prior to `\begin{document}`
+## Prior to `\begin{document}`
 A font family is selected with :
 
 ```
 \usepackage{<fontpkg>}
 ```
 
-#### In Body
+## In Body
 Then a certain block of text is assigned a font with the wrapper:
 
 ```
@@ -138,7 +138,7 @@ Then a certain block of text is assigned a font with the wrapper:
 ```
 
 
-#### Example
+## Example
 
 ```
 \documentclass{article}
@@ -261,7 +261,7 @@ Now comes the fun... There are a few components to using a bibliography.
 
 
 
-#### Prior to `\begin{document}`
+## Prior to `\begin{document}`
 
 Indicating a bib package to use. There are some arguments used here to specify the style of the citations and the sorting of the reference list. This particular combination was used for a report we did.
 ```
@@ -280,7 +280,7 @@ Secondly you must call a function to point to your bibliography file (`.bib`) wh
 ```
 
 
-#### In Body
+## In Body
 
 Insert the function at end of your document but before the `\end{}`.
 
@@ -288,7 +288,7 @@ Insert the function at end of your document but before the `\end{}`.
 \printbibliography
 ```
 
-#### References
+## References
 
 In the `.bib` file a reference might look like the following (the which can often be near the paper on google scholar if it is a academic paper, otherwise you will probably have to prepare them yourself):
 ```
@@ -313,7 +313,7 @@ In the `.bib` file a reference might look like the following (the which can ofte
 
 # Citations
 
-#### Author Year
+## Author Year
 
 The first element of the reference (which is completely arbitrary) in a record in the `.bib` file  can be called in a citation function like so:
 
@@ -330,7 +330,7 @@ Or another sentence goes here \parencite[5]{garland2005}.
 It could have been from \citeauthor{garland2005} (\citeyear{garland2005})
 ```
 
-#### Numeric
+## Numeric
 
 Try differnt options for numeric citations.
 
@@ -369,7 +369,7 @@ Are included by default. To nullify the inclusion of page numbers use:
 
 # R Chunks in Sweave
 
-#### Syntax
+## Syntax
 
 Instead of the markdown usage of backticks and curly brackets, `sweave` uses the following syntax to define a chunk:
 
@@ -382,7 +382,7 @@ print(mtcars)
 ```
 
 
-#### Setup chunk
+## Setup chunk
 ```
 <<setup, include=FALSE, cache=FALSE, echo=FALSE>>=
 opts_chunk$set(echo=F)
@@ -390,7 +390,7 @@ library(<pkgs>)
 @
 ```
 
-#### Plotting
+## Plotting
 
 ```
 <<cars, warning=FALSE, message=F>>=
@@ -410,7 +410,7 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 
 # Using Figures
 
-#### R Output
+## R Output
 
 ```
 \begin{figure}
@@ -423,7 +423,7 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 \end{figure}
 ```
 
-#### Image from file
+## Image from file
 
 ```
 \begin{figure}
@@ -434,7 +434,7 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 
 ```
 
-#### Advenaced Two figures side by side with a single caption
+## Advenaced Two figures side by side with a single caption
 
 ```
 \usepackage{graphicx,caption}
