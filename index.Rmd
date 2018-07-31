@@ -19,16 +19,39 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-# Why
+# The why
 
 ![](imgs/why.gif)
+
+
+
 
 
 > Bottom line: Markdown is not LaTeX. It was designed for HTML instead of LaTeX.
 
 (Yihui Xie Explaining Markdown, Pandoc, and LaTeX formattting power on SO )[https://stackoverflow.com/a/17648350/9115822]
 
+
+
+
 ***
+
+
+# Get the repo
+
+```git
+git clone https://github.com/trendlock/picklerick.git
+```
+
+***
+
+# Open a `.Rnw.` file
+
+![](imgs/open.png)
+
+
+***
+
 
 # Basics
 
@@ -49,9 +72,15 @@ Text
 \end{document}
 ```
 
+
+
+
 ***
 
-# Spacing, Page Breaks, Formatting
+
+
+
+# Spacing / Page Breaks
 
 In general `sweave` will behave smartly with images, tables and plots. But there are commands to manually adjust the behaviour.
 
@@ -65,6 +94,7 @@ In general `sweave` will behave smartly with images, tables and plots. But there
 - {`\pagebreak`} - *encourage page break*
 
 Ie. the following will give two pages with the word `Text on them`
+
 ```
 \documentclass{article}
 
@@ -77,9 +107,18 @@ Text
 \end{document}
 ```
 
-[More resources ](http://www.personal.ceu.hu/tex/breaking.htm)
+[More resources](http://www.personal.ceu.hu/tex/breaking.htm)
+
+
+
+
+
 
 ***
+
+
+
+
 
 # Typeface
 
@@ -100,6 +139,7 @@ Then a certain block of text is assigned a font with the wrapper:
 
 
 #### Example
+
 ```
 \documentclass{article}
 
@@ -152,7 +192,14 @@ tibble::tribble(
 
 [Source](https://www.sharelatex.com/learn/Font_typefaces)
 
+
+
+
 ***
+
+
+
+
 
 
 # Table of Contents
@@ -165,7 +212,14 @@ Inserted after `\begin{document}`:
 This will build a table of contents for that numbers all `\section{}` and `\subsection{}` elements.
 
 
+
+
+
 ***
+
+
+
+
 
 
 # Margin Control
@@ -175,7 +229,14 @@ Adjust:
 \usepackage[margin=0.8in]{geometry}
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Footnotes
 
@@ -185,7 +246,14 @@ Footnotes can be inserted with the following function, and are self numbering:
 \footnote{A footnote}
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Bibliographies
 
@@ -234,7 +302,14 @@ In the `.bib` file a reference might look like the following (the which can ofte
 }
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Citations
 
@@ -266,7 +341,14 @@ Try differnt options for numeric citations.
 
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Page Numbers
 
@@ -276,7 +358,14 @@ Are included by default. To nullify the inclusion of page numbers use:
 \pagenumbering{gobble}
 ```
 
+
+
+
 ***
+
+
+
+
 
 # R Chunks in Sweave
 
@@ -310,7 +399,14 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 @
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Using Figures
 
@@ -363,15 +459,28 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 \end{figure}
 ```
 
+
+
+
 ***
+
+
+
+
 
 # Referring to figures
 
 ```
-Here is a sentence with reference to Figure \ref{fig:Cars}.
+Here is a sentence with reference to Figure \ref{fig:rickmorty}.
 ```
 
+
+
+
 ***
+
+
+
 
 
 # Cheat Sheet
