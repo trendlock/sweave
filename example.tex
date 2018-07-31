@@ -49,9 +49,69 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
+
+
+\usepackage[backend=bibtex, sorting=none, citestyle=authoryear]{biblatex}
+\bibliography{refs}
+
+\pagenumbering{gobble}
+
+%  For caption width
+\usepackage{graphicx,caption}
+% For Centering figs
+% \usepackage[export]{adjustbox}
+% For split figures
+\usepackage{subcaption}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
-Text
+
+
+Blah.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/plot-1} 
+
+\end{knitrout}
+
+A sentence goes here \parencite{garland2005}, and was also discussed in \citeauthor{garland2005} (\citeyear{garland2005}).
+
+
+\newpage
+
+Here is a sentence with reference to Figure \ref{fig:Cars}.
+
+\begin{figure}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cars-1} 
+
+\end{knitrout}
+\caption{The relationship between cylinder displacement and miles per gallon for each car.}
+\label{fig:Cars}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/rick.png}
+\caption{}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/morty.jpg}
+\caption{}
+\end{subfigure}
+
+\caption{(a) Rick and (b) Morty}
+\label{fig:rickmorty}
+\end{figure}
+
+
+\newpage
+
+\printbibliography
 
 \end{document}

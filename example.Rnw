@@ -1,7 +1,69 @@
 \documentclass{article}
 
+
+\usepackage[backend=bibtex, sorting=none, citestyle=authoryear]{biblatex}
+\bibliography{refs}
+
+\pagenumbering{gobble}
+
+%  For caption width
+\usepackage{graphicx,caption}
+% For Centering figs
+% \usepackage[export]{adjustbox}
+% For split figures
+\usepackage{subcaption}
+
 \begin{document}
 
-Text
+<<setup, include=FALSE, cache=FALSE, echo=FALSE>>=
+opts_chunk$set(echo=F)
+
+library(tidyverse)
+@
+
+Blah.
+
+<<plot>>=
+ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
+  geom_point()
+@
+
+A sentence goes here \parencite{garland2005}, and was also discussed in \citeauthor{garland2005} (\citeyear{garland2005}).
+
+
+\newpage
+
+Here is a sentence with reference to Figure \ref{fig:Cars}.
+
+\begin{figure}
+<<cars, warning=FALSE, message=F>>=
+ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
+  geom_point()
+@
+\caption{The relationship between cylinder displacement and miles per gallon for each car.}
+\label{fig:Cars}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/rick.png}
+\caption{}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/morty.jpg}
+\caption{}
+\end{subfigure}
+
+\caption{(a) Rick and (b) Morty}
+\label{fig:rickmorty}
+\end{figure}
+
+
+\newpage
+
+\printbibliography
 
 \end{document}

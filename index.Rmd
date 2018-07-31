@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   html_document:
     theme: darkly
+    code_folding: "hide"
     toc: true
     toc_depth: 2
     toc_float: true
@@ -20,11 +21,14 @@ library(tidyverse)
 
 # Why
 
+![](imgs/why.gif)
+
 
 > Bottom line: Markdown is not LaTeX. It was designed for HTML instead of LaTeX.
 
-(Yihui Xie Explaining Markdown, Pandoc,formattting power on SO )[https://stackoverflow.com/a/17648350/9115822]
+(Yihui Xie Explaining Markdown, Pandoc, and LaTeX formattting power on SO )[https://stackoverflow.com/a/17648350/9115822]
 
+***
 
 # Basics
 
@@ -43,42 +47,333 @@ A simple form of a `sweave` document is:
 Text
 
 \end{document}
-
 ```
 
+***
 
 # Spacing, Page Breaks, Formatting
 
+In general `sweave` will behave smartly with images, tables and plots. But there are commands to manually adjust the behaviour.
 
 
-# Margins
+- {`\clearpage`} -  *plush all material and start a new page*
+- {`\clearpage`} - *allow to break the line here*
+- {`\newline`} - *request a new line*
+- {`\newpage`} - *request a new page*
+- {`\nolinebreak`} - *no line break should happen here*
+- {`\nopagebreak`} - *no page break should happen here*
+- {`\pagebreak`} - *encourage page break*
 
+Ie. the following will give two pages with the word `Text on them`
 ```
-\usepackage[margin=0.8in]{geometry}
+\documentclass{article}
+
+\begin{document}
+
+Text
+\newpage
+Text
+
+\end{document}
 ```
+
+[More resources ](http://www.personal.ceu.hu/tex/breaking.htm)
+
+***
 
 # Typeface
 
+
+#### Prior to `\begin{document}`
+A font family is selected with :
+
+```
+\usepackage{<fontpkg>}
+```
+
+#### In Body
+Then a certain block of text is assigned a font with the wrapper:
+
+```
+{\fontfamily{<fontcode>}\selectfont <text> }
+```
+
+
+#### Example
+```
+\documentclass{article}
+
+\usepackage{tgadventor}
+
+\begin{document}
+
+{\fontfamily{qag}\selectfont
+
+This document is a sample document to test font
+families and font typefaces.
+
+}
+\end{document}
+
+```
+
+Some examples to choose from:
+```{r}
+
+
+tibble::tribble(
+                           ~Font, ~"fontpkg", ~"fontcode",            ~Example,
+         "Computer Modern Roman",                 NA,       "cmr",  "Typeface-cmr.png",
+            "Latin Modern Roman",          "lmodern",       "lmr",  "Typeface-lmr.png",
+          "Latin Modern Dunhill",          "lmodern",      "lmdh", "Typeface-lmdh.png",
+               "TEX Gyre Termes",         "tgtermes",       "qtm",  "Typeface-qtm.png",
+              "TEX Gyre Pagella",        "tgpagella",       "qpl",  "Typeface-qpl.png",
+                "TEX Gyre Bonum",          "tgbonum",       "qbk",  "Typeface-qbk.png",
+               "TEX Gyre Schola",         "tgschola",       "qcs",  "Typeface-qsc.png",
+                         "Times",            "times",       "ptm",  "Typeface-ptm.png",
+              "Utopia / Fourier", "utopia / fourier",       "put",  "Typeface-put.png",
+                      "Palatino",         "palatino",       "ppl",  "Typeface-ppl.png",
+                       "Bookman",          "bookman",       "pbk",  "Typeface-pbk.png",
+                       "Charter",          "charter",       "bch",  "Typeface-bch.png",
+    "Computer Modern Sans Serif",                 NA,      "cmss", "Typeface-cmss.png",
+       "Latin Modern Sans Serif",          "lmodern",      "lmss", "Typeface-lmss.png",
+             "TEX Gyre Adventor",       "tgadventor",       "qag",  "Typeface-qag.png",
+                "TEX Gyre Heros",          "tgheros",       "qhv",  "Typeface-qhv.png",
+                     "Helvetica",           "helvet",       "phv",  "Typeface-phv.png",
+    "Computer Modern Typewriter",                 NA,      "cmtt", "Typeface-cmtt.png",
+  "Latin Modern Sans Typewriter",          "lmodern",      "lmtt", "Typeface-lmtt.png",
+               "TEX Gyre Cursor",         "tgcursor",       "qcr",  "Typeface-qcr.png",
+                       "Courier",          "courier",       "pcr",  "Typeface-pcr.png"
+  ) %>% select(-Example) %>%
+  kableExtra::kable()
+
+
+```
+
+[Source](https://www.sharelatex.com/learn/Font_typefaces)
+
+***
+
+
 # Table of Contents
+
+Inserted after `\begin{document}`:
+```
+\tableofcontents
+
+```
+This will build a table of contents for that numbers all `\section{}` and `\subsection{}` elements.
+
+
+***
 
 
 # Margin Control
 
+Adjust:
+```
+\usepackage[margin=0.8in]{geometry}
+```
 
-# Typeface / Font
-
+***
 
 # Footnotes
 
+Footnotes can be inserted with the following function, and are self numbering:
+
+```
+\footnote{A footnote}
+```
+
+***
 
 # Bibliographies
 
+Now comes the fun... There are a few components to using a bibliography.
+
+
+
+#### Prior to `\begin{document}`
+
+Indicating a bib package to use. There are some arguments used here to specify the style of the citations and the sorting of the reference list. This particular combination was used for a report we did.
+```
+\usepackage[backend=bibtex, sorting=none, citestyle=authoryear]{biblatex}
+```
+
+Alternatively a author - year style would be another typical requirement: `citestyle=authoryear`.
+
+
+[Documentation on sorting: biblatex 3.1.2](http://mirror.aarnet.edu.au/pub/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf)
+
+Secondly you must call a function to point to your bibliography file (`.bib`) which must be in the same directory. In this example my file is called `refs.bib`.
+
+```
+\bibliography{refs}
+```
+
+
+#### In Body
+
+Insert the function at end of your document but before the `\end{}`.
+
+```
+\printbibliography
+```
+
+#### References
+
+In the `.bib` file a reference might look like the following (the which can often be near the paper on google scholar if it is a academic paper, otherwise you will probably have to prepare them yourself):
+```
+@article{garland2005,
+  author={Bill Garland},
+  title = {Elementary Physics of Reactor Control Module - Fission Product Poisoning},
+  volume = {3},
+  url = {http://www.nuceng.ca/br_space/2017-09_4d03_6d03/misc_files/xenon_poisoning.pdf},
+  publisher = {Nuclear Engineering (Originally from McMaster University)},
+  year = {2005}
+}
+```
+
+***
 
 # Citations
 
+#### Author Year
+
+The first element of the reference (which is completely arbitrary) in a record in the `.bib` file  can be called in a citation function like so:
+
+```
+A sentence with info from \cite{garland2005}
+```
+With variations to indicate page number of change the format of the citation:
+
+```
+Sentence goes here \parencite{garland2005}.
+
+Or another sentence goes here \parencite[5]{garland2005}.
+
+It could have been from \citeauthor{garland2005} (\citeyear{garland2005})
+```
+
+#### Numeric
+
+Try differnt options for numeric citations.
+
+> Tip: delete all the temp files in dir to clear bib settings.
+
+```
+\usepackage[backend=bibtex, sorting=none, citestyle=numeric]{biblatex}
+
+```
+
+***
 
 # Page Numbers
 
+Are included by default. To nullify the inclusion of page numbers use:
+
+```
+\pagenumbering{gobble}
+```
+
+***
+
+# R Chunks in Sweave
+
+#### Syntax
+
+Instead of the markdown usage of backticks and curly brackets, `sweave` uses the following syntax to define a chunk:
+
+```
+<<chunkname>>=
+
+print(mtcars)
+
+@
+```
 
 
-# Tables
+#### Setup chunk
+```
+<<setup, include=FALSE, cache=FALSE, echo=FALSE>>=
+opts_chunk$set(echo=F)
+library(<pkgs>)
+@
+```
+
+#### Plotting
+
+```
+<<cars, warning=FALSE, message=F>>=
+ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
+  geom_point()
+@
+```
+
+***
+
+# Using Figures
+
+#### R Output
+
+```
+\begin{figure}
+<<cars, warning=FALSE, message=F>>=
+ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
+  geom_point()
+@
+\caption{The relationship between cylinder displacement and miles per gallon for each car.}
+\label{fig:Cars}
+\end{figure}
+```
+
+#### Image from file
+
+```
+\begin{figure}
+\includegraphics[width=\textwidth]{imgs/morty.jpg}
+\caption{A caption about Morty}
+\label{fig:morty}
+\end{figure}
+
+```
+
+#### Advenaced Two figures side by side with a single caption
+
+```
+\usepackage{graphicx,caption}
+\usepackage{subcaption}
+
+\begin{document}
+
+\begin{figure}
+
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/rick.png}
+\caption{}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth]{imgs/morty.jpg}
+\caption{}
+\end{subfigure}
+
+\caption{(a) Rick and (b) Morty}
+\label{fig:rickmorty}
+
+\end{figure}
+```
+
+***
+
+# Referring to figures
+
+```
+Here is a sentence with reference to Figure \ref{fig:Cars}.
+```
+
+***
+
+
+# Cheat Sheet
+
+[Link](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf)
