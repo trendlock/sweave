@@ -24,15 +24,9 @@ library(tidyverse)
 ![](imgs/why.gif)
 
 
-
-
-
 > Bottom line: Markdown is not LaTeX. It was designed for HTML instead of LaTeX.
 
-(Yihui Xie Explaining Markdown, Pandoc, and LaTeX formattting power on SO )[https://stackoverflow.com/a/17648350/9115822]
-
-
-
+(Yihui Xie Explaining Markdown, Pandoc, and LaTeX formatting power on SO )[https://stackoverflow.com/a/17648350/9115822]
 
 ***
 
@@ -72,12 +66,7 @@ Text
 \end{document}
 ```
 
-
-
-
 ***
-
-
 
 
 # Spacing / Page Breaks
@@ -107,17 +96,11 @@ Text
 \end{document}
 ```
 
+
 [More resources](http://www.personal.ceu.hu/tex/breaking.htm)
 
 
-
-
-
-
 ***
-
-
-
 
 
 # Typeface
@@ -192,15 +175,7 @@ tibble::tribble(
 
 [Source](https://www.sharelatex.com/learn/Font_typefaces)
 
-
-
-
 ***
-
-
-
-
-
 
 # Table of Contents
 
@@ -211,16 +186,7 @@ Inserted after `\begin{document}`:
 ```
 This will build a table of contents for that numbers all `\section{}` and `\subsection{}` elements.
 
-
-
-
-
 ***
-
-
-
-
-
 
 # Margin Control
 
@@ -229,13 +195,7 @@ Adjust:
 \usepackage[margin=0.8in]{geometry}
 ```
 
-
-
-
 ***
-
-
-
 
 
 # Footnotes
@@ -246,14 +206,7 @@ Footnotes can be inserted with the following function, and are self numbering:
 \footnote{A footnote}
 ```
 
-
-
-
 ***
-
-
-
-
 
 # Bibliographies
 
@@ -303,12 +256,7 @@ In the `.bib` file a reference might look like the following (the which can ofte
 ```
 
 
-
-
 ***
-
-
-
 
 
 # Citations
@@ -434,7 +382,7 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 
 ```
 
-## Advenaced Two figures side by side with a single caption
+## Advanced: Two figures side by side with a single caption
 
 ```
 \usepackage{graphicx,caption}
@@ -459,14 +407,7 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 \end{figure}
 ```
 
-
-
-
 ***
-
-
-
-
 
 # Referring to figures
 
@@ -474,13 +415,27 @@ ggplot(mtcars, aes(disp, mpg, col = as.factor(gear))) +
 Here is a sentence with reference to Figure \ref{fig:rickmorty}.
 ```
 
+# Positioning of figures
+
+
+- `[h]`	Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+- `[t]`	Position at the top of the page.
+- `[b]`	Position at the bottom of the page.
+- `[p]`	Put on a special page for floats only.
+- `[H]`	Places the float at precisely the location in the LaTeX code. Requires the float package (`\usepackage{float}`).
+
+[Source][https://www.sharelatex.com/learn/Positioning_of_Figures]
 
 
 
 ***
 
+# Inline code
 
-
+```
+\Sexpr{Sys.Date()}
+```
+(Stands for `S` expression. `S` being the precursor to `R`)
 
 
 # Cheat Sheet
